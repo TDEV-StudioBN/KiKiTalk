@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const KiKiTalk());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class KiKiTalk extends StatelessWidget {
+  const KiKiTalk({super.key});
 
   // This widget is the root of your application.
   @override
