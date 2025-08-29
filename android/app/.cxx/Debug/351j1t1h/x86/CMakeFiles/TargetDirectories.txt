@@ -1,0 +1,2 @@
+C:/Users/daonh/AndroidStudioProjects/KiKiTalk/android/app/.cxx/Debug/351j1t1h/x86/CMakeFiles/edit_cache.dir
+C:/Users/daonh/AndroidStudioProjects/KiKiTalk/android/app/.cxx/Debug/351j1t1h/x86/CMakeFiles/rebuild_cache.dir

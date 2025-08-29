@@ -7,13 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kikitalk/features/user/presentation/screens/login.dart';
 
-import 'package:kikitalk/main.dart';
+// import 'package:kikitalk/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const KiKiTalk());
+    await tester.pumpWidget(const SCRLogin());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

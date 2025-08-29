@@ -9,6 +9,11 @@ sealed class Failure {
   }
 }
 
+//=== App Failures ===
+class AppFailure extends Failure {
+  const AppFailure() : super("Something went wrong");
+}
+
 //=== Auth Failures ===
 sealed class AuthFailure extends Failure {
   const AuthFailure(super.error);
@@ -52,10 +57,15 @@ sealed class DatabaseFailure extends Failure {
 
   const factory DatabaseFailure.notFound() = NotFoundFailure;
   const factory DatabaseFailure.writeError() = WriteErrorFailure;
+  const factory DatabaseFailure.getError() = GetErrorFailure;
 }
 
 class NotFoundFailure extends DatabaseFailure {
   const NotFoundFailure() : super("Data not found");
+}
+
+class GetErrorFailure extends DatabaseFailure {
+  const GetErrorFailure() : super("Failed to get data");
 }
 
 class WriteErrorFailure extends DatabaseFailure {

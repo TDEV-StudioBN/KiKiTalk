@@ -1,4 +1,4 @@
-import 'package:kikitalk/core/database/tables/user_table.dart';
+import 'package:kikitalk/features/user/data/tables/user_table.dart';
 import 'package:kikitalk/features/user/domain/user_entity.dart';
 
 UserTable get _table => UserTable.instance;

@@ -1,4 +1,4 @@
-import 'package:kikitalk/core/database/tables/skills_table.dart';
+import 'package:kikitalk/features/skills/data/tables/skills_table.dart';
 import 'package:kikitalk/features/skills/domain/entities/skills_entity.dart';
 
 SkillsTable get _table => SkillsTable.instance;

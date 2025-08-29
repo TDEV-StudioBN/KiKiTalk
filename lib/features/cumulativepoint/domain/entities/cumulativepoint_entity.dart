@@ -1,19 +1,13 @@
+import 'package:kikitalk/core/models_interface/cumulativepoint_interface.dart';
 
-class ENTCumulativePoint {
-  final int id;
-  final String userEmail;
-  final int diamond;
-  final int gold;
-  final int rankPoints;
-  final int streakDays;
-
+class ENTCumulativePoint extends ICumulativePoint {
   ENTCumulativePoint({
-    required this.id,
-    required this.userEmail,
-    required this.diamond,
-    required this.gold,
-    required this.rankPoints,
-    required this.streakDays,
+    required super.id,
+    required super.userEmail,
+    required super.diamond,
+    required super.gold,
+    required super.rankPoints,
+    required super.streakDays,
   });
 
   @override

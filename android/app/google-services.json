@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "627175427086",
+    "project_id": "kikitalk-ac968",
+    "storage_bucket": "kikitalk-ac968.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627175427086:android:e7b439314e0428b0e2405f",
+        "android_client_info": {
+          "package_name": "tdev.kikitalk.kikitalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMAeM6oNqtC7lZd2cW1nDqfuF28K5gPX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,4 @@
-
-import 'package:kikitalk/core/database/tables/cumulativepoint_table.dart';
+import 'package:kikitalk/features/cumulativepoint/data/tables/cumulativepoint_table.dart';
 import 'package:kikitalk/features/cumulativepoint/domain/entities/cumulativepoint_entity.dart';
 
 CumulativePointTable get _table => CumulativePointTable.instance;
@@ -27,7 +26,7 @@ class MODCumulativePoint extends ENTCumulativePoint {
 
   factory MODCumulativePoint.fromMap(Map<String, dynamic> map) {
     return MODCumulativePoint(
-      id: map[_table.columnId] as int,
+      id: map[_table.columnId] as String,
       userEmail: map[_table.columnUserEmail] as String,
       diamond: map[_table.columnDiamond] as int,
       gold: map[_table.columnGold] as int,

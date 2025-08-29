@@ -11,8 +11,7 @@ class Success<T> extends Result<T> {
 
 class Fail<T> extends Result<T> {
   final Failure error;
-  final T? value;
-  const Fail(this.error, {this.value});
+  const Fail(this.error);
 }
 
 extension ResultX<T> on Result<T> {
@@ -21,11 +20,11 @@ extension ResultX<T> on Result<T> {
 
   R fold<R>({
     required R Function(T value) onSuccess,
-    required R Function(Failure error, [T? value]) onFailure,
+    required R Function(Failure error) onFailure,
   }) {
     return switch (this) {
       Success(:final value) => onSuccess(value),
-      Fail(:final error, :final value) => onFailure(error, value),
+      Fail(:final error) => onFailure(error),
     };
   }
 }
