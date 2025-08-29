@@ -1,0 +1,12 @@
+ANDROID
+-------------------
+package: tdev.kikitalk.kikitalk
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\daonh\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 12:BB:6C:08:94:E1:11:84:78:D0:EB:4C:54:32:E8:C2
+SHA1: E0:7D:12:A0:18:06:EE:74:27:55:23:C2:BA:87:99:A5:1D:81:FB:68
+SHA-256: 4A:7D:24:87:C7:A0:19:57:D7:62:09:3B:E3:CB:4A:2C:D8:BF:AC:18:33:53:D4:88:B2:DD:F5:EC:A4:0A:25:2D
+
+====================================================================================================
