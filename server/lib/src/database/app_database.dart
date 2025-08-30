@@ -74,7 +74,7 @@ class VMDatabase extends IDatabase<Database> {
   }
 
   @override
-  Future<void> upsert({required String table, required Map<String, Object?> data, List<String>? updateColumns}) async {
+  Future<void> upsert({required String table, required Map<String, Object?> data, List<String>? updateColumns, String conflictColumn = 'id',}) async {
     final columns = data.keys.join(', ');
     final placeholders = List.filled(data.length, '?').join(', ');
 
@@ -82,7 +82,7 @@ class VMDatabase extends IDatabase<Database> {
 
     if (updateColumns != null && updateColumns.isNotEmpty) {
       final updates = updateColumns.map((c) => '$c = ?').join(', ');
-      sql += ' ON CONFLICT(id) DO UPDATE SET $updates';
+      sql += ' ON CONFLICT($conflictColumn) DO UPDATE SET $updates';
     }
 
     final stmt = db.prepare(sql);
@@ -103,4 +103,44 @@ class VMDatabase extends IDatabase<Database> {
       ));
     }
   }
+
+  @override
+  Future<bool> upsertBatch({required String table, required List<Map<String, Object?>> dataList, List<String>? updateColumns, String conflictColumn = 'id',}) async {
+    if (dataList.isEmpty) return true;
+
+    final columns = dataList.first.keys.toList();
+    final placeholders = List.filled(columns.length, '?').join(',');
+
+    String updateClause = '';
+    if (updateColumns != null && updateColumns.isNotEmpty) {
+      final updates = updateColumns.map((col) => '$col=excluded.$col').join(', ');
+      updateClause = 'DO UPDATE SET $updates';
+    } else {
+      updateClause = 'DO NOTHING';
+    }
+
+    final sql = '''
+      INSERT INTO $table (${columns.join(',')})
+      VALUES ($placeholders)
+      ON CONFLICT($conflictColumn) $updateClause
+    ''';
+
+    try {
+      db.execute('BEGIN');
+
+      final stmt = db.prepare(sql);
+      for (final data in dataList) {
+        stmt.execute(columns.map((c) => data[c]).toList());
+      }
+      stmt.dispose();
+
+      db.execute('COMMIT');
+      return true;
+    } catch (e) {
+      logError(e.toString());
+      db.execute('ROLLBACK');
+      rethrow;
+    }
+  }
+
 }

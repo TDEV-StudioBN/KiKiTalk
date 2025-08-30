@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:server/src/utils/log_util.dart';
 
 enum ChangeType { upsert, update, delete }
@@ -22,7 +21,7 @@ class DbChange {
 
 abstract class IDatabase<T> {
   late final T db;
-  final String name = 'database.db';
+  final String name = 'database1.db';
 
   bool streamMode = false;
   StreamController<DbChange>? changeController;
@@ -47,6 +46,14 @@ abstract class IDatabase<T> {
     required String table,
     required Map<String, Object?> data,
     List<String>? updateColumns,
+    String conflictColumn = 'id',
+  });
+
+  Future<bool> upsertBatch({
+    required String table,
+    required List<Map<String, Object?>> dataList,
+    List<String>? updateColumns,
+    String conflictColumn = 'id',
   });
 
   /// Cập nhật dữ liệu trong bảng

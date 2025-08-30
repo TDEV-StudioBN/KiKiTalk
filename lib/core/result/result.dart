@@ -2,6 +2,9 @@ import 'package:kikitalk/core/result/failure.dart';
 
 sealed class Result<T> {
   const Result();
+
+  factory Result.success(T value) = Success<T>;
+  factory Result.error(Failure error) = Fail<T>;
 }
 
 class Success<T> extends Result<T> {

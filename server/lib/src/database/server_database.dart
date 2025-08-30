@@ -64,6 +64,7 @@ class ClientDatabase extends IDatabase<Database> {
     required String table,
     required Map<String, Object?> data,
     List<String>? updateColumns,
+    String conflictColumn = 'id',
   }) async {
     final columns = data.keys.join(', ');
     final placeholders = List.filled(data.length, '?').join(', ');
@@ -72,7 +73,7 @@ class ClientDatabase extends IDatabase<Database> {
 
     if (updateColumns != null && updateColumns.isNotEmpty) {
       final updates = updateColumns.map((c) => '$c = ?').join(', ');
-      sql += ' ON CONFLICT(id) DO UPDATE SET $updates';
+      sql += ' ON CONFLICT($conflictColumn) DO UPDATE SET $updates';
     }
 
     final values = [
@@ -141,4 +142,33 @@ class ClientDatabase extends IDatabase<Database> {
     if (result.isEmpty) return null;
     return result.first;
   }
+
+  @override
+  Future<bool> upsertBatch({
+    required String table,
+    required List<Map<String, Object?>> dataList,
+    List<String>? updateColumns,
+    String conflictColumn = 'id',
+  }) async {
+    if (dataList.isEmpty) return true;
+
+    final batch = db.batch();
+
+    for (final data in dataList) {
+      batch.insert(
+        table,
+        data,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+
+    try {
+      await batch.commit(noResult: true);
+      return true;
+    } catch (e, st) {
+      logError('upsertBatch failed: $e\n$st');
+      return false;
+    }
+  }
+
 }

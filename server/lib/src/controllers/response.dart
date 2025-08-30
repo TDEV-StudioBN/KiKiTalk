@@ -1,3 +1,8 @@
+/// Kết quả trả về tương tự backend thật
+/// [Success200]
+/// [BadRequest400]
+/// [NotFound404]
+/// [InternalServerError500]
 sealed class Response {
   final int status;
   const Response(this.status);
@@ -5,16 +10,29 @@ sealed class Response {
   Map<String, dynamic> toJson();
 }
 
-/// Stream Response
-class StreamResponse {
-  final Stream<Response> _stream;
-  StreamResponse(this._stream);
+sealed class IFutureResponse {}
+sealed class IStreamResponse {}
 
-  Stream<Map<String, dynamic>> toStream() {
-    return _stream.map((res) => res.toJson());
+class FutureResponse extends IFutureResponse {
+  final Future<Response> _future;
+  FutureResponse(this._future);
+  FutureResponse.value(Response response) : _future = Future.value(response);
+
+  Future<Map<String, dynamic>> futureJson() async {
+    return (await _future).toJson();
   }
 }
 
+/// Kết quả trả về `stream` [Response]
+class StreamResponse extends IStreamResponse {
+  final Stream<Response> _stream;
+  StreamResponse(this._stream);
+  StreamResponse.value(Response response) : _stream = Stream.value(response);
+
+  Stream<Map<String, dynamic>> streamJson() {
+    return _stream.map((res) => res.toJson());
+  }
+}
 
 /// Thành công 200 (Success)
 /// Dùng khi xử lý API thành công, trả về dữ liệu

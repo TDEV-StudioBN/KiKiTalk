@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kikitalk/app/style/appstyle.dart';
+import 'package:kikitalk/app/style/readingmode.dart';
 import 'package:kikitalk/screen/presentation/screens/kikitalk_screen.dart';
 import 'app/app_init.dart';
 
@@ -27,7 +28,7 @@ class AppScreen extends StatelessWidget {
             darkTheme: theme.dark,
             themeMode: theme.mode,
             home: const Material(
-                child: SCRKikiTalk()
+                child: ReadingPaperBackground(child: SCRKikiTalk())
             )
         );
       }

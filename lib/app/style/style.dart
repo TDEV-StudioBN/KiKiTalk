@@ -23,12 +23,12 @@ class AppTheme extends IAppStyle {
 
 class AppColor extends IAppStyle {
   AppColor._(super.context);
-
-  Color get primary => Theme.of(_context).primaryColor.withValues(alpha: 0.5);
-  Color get secondary => Theme.of(_context).primaryColor.withValues(alpha: 0.2);
-  Color get backgroundPrimary => Theme.of(_context).primaryColor.withValues(alpha: 0.2);
-  Color get backgroundSecondary => Theme.of(_context).primaryColor.withValues(alpha: 0.05);
-  Color get statusBar => Theme.of(_context).primaryColor.withValues(alpha: 0.33);
+  static double get alphaCoefficient => 0.5;
+  Color get primary => Theme.of(_context).primaryColor.withValues(alpha: alphaCoefficient);
+  Color get secondary => Theme.of(_context).primaryColor.withValues(alpha: alphaCoefficient - 0.3);
+  Color get backgroundPrimary => Theme.of(_context).primaryColor.withValues(alpha: alphaCoefficient - 0.4);
+  Color get backgroundSecondary => Theme.of(_context).primaryColor.withValues(alpha: alphaCoefficient - 0.45);
+  Color get statusBar => Theme.of(_context).primaryColor.withValues(alpha: alphaCoefficient - 0.25);
   Color get textPrimary => Theme.of(_context).primaryColor;
   Color get textSecondary => Theme.of(_context).primaryColor.withValues(alpha: 0.5);
   Color get cardColor => Theme.of(_context).cardColor;
@@ -42,19 +42,26 @@ class AppSize extends IAppStyle {
   double get heightScreen => MediaQuery.of(_context).size.height;
   double get widthScreen => MediaQuery.of(_context).size.width;
 
-  static double get padding => 8;
+  static const double padding = 8;
 
-  static double get small1 => 10.0;
-  static double get small2 => 15.0;
-  static double get small3 => 20.0;
-  static double get small4 => 25.0;
+  static const double textTitle = 18.0;
+  static const double textBody = 14.0;
 
-  static double get medium1 => 30.0;
-  static double get medium2 => 40.0;
-  static double get medium3 => 50.0;
-  static double get medium4 => 60.0;
+  // Small spacing
+  static const double small1 = 10.0;
+  static const double small2 = 12.0;
+  static const double small3 = 14.0;
+  static const double small4 = 16.0;
 
-  static double get large1 => 70.0;
-  static double get large2 => 80.0;
-  static double get large3 => 90.0;
+  // Medium spacing
+  static const double medium1 = 18.0;
+  static const double medium2 = 22.0;
+  static const double medium3 = 26.0;
+  static const double medium4 = 30.0;
+
+  // Large spacing
+  static const double large1 = 34.0;
+  static const double large2 = 40.0;
+  static const double large3 = 46.0;
+  static const double large4 = 52.0;
 }

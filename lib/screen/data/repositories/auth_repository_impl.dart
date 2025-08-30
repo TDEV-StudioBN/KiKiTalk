@@ -1,4 +1,4 @@
-import 'package:kikitalk/core/log/log.dart';
+import 'package:kikitalk/utils/log.dart';
 import 'package:kikitalk/core/result/failure.dart';
 import 'package:kikitalk/core/result/result.dart';
 import 'package:kikitalk/screen/data/datasources/local.dart';

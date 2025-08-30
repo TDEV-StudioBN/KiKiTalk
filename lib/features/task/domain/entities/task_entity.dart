@@ -1,28 +1,20 @@
-class ENTTask {
-  final int id;
-  final String key;
-  final String title;
-  final String description;
+import 'package:kikitalk/core/models_interface/task_interface.dart';
 
-  final double progress;
-  final double total;
-  bool get isCompleted => progress >= total;
-
-  final int rewardGold;
-  final int rewardDiamond;
-  final bool isRewardGiven;
-
+class ENTTask extends ITask {
   ENTTask({
-    required this.id,
-    required this.key,
-    required this.title,
-    required this.description,
-    required this.progress,
-    required this.total,
-    required this.rewardGold,
-    required this.rewardDiamond,
-    required this.isRewardGiven,
+    required super.id,
+    required super.userEmail,
+    required super.key,
+    required super.title,
+    required super.description,
+    required super.progress,
+    required super.total,
+    required super.rewardGold,
+    required super.rewardDiamond,
+    required super.isRewardGiven
   });
+
+  bool get isCompleted => progress == total;
 
   @override
   String toString() {

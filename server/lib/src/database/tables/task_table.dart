@@ -21,10 +21,10 @@ class TaskTable extends TableSchema {
   @override
   String get build => '''
     CREATE TABLE IF NOT EXISTS $name (
-      $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-      $columnUserEmail TEXT NOT NULL UNIQUE,
+      $columnId TEXT PRIMARY KEY,
+      $columnUserEmail TEXT NOT NULL,
       
-      $columnKey TEXT NOT NULL UNIQUE,
+      $columnKey TEXT NOT NULL,
       $columnTitle TEXT NOT NULL,
       $columnDescription TEXT NOT NULL,
       

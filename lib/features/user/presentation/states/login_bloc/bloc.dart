@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kikitalk/app/configs/auth_config.dart';
-import 'package:kikitalk/core/log/log.dart';
+import 'package:kikitalk/utils/log.dart';
 import 'package:kikitalk/features/user/presentation/states/login_bloc/event.dart';
 import 'package:kikitalk/features/user/presentation/states/login_bloc/state.dart';
 

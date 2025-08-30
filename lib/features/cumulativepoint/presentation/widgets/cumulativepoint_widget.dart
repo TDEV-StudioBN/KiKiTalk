@@ -142,12 +142,8 @@ class _CumulativePointView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CumulativePointCubit, CumulativePointState>(
       builder: (context, state) {
-        if (state.loading) {
+        if (state.data == null) {
           return const Center(child: CircularProgressIndicator());
-        }
-
-        if (state.error != null) {
-          return Center(child: Text('Lỗi: ${state.error}'));
         }
 
         final point = state.data;

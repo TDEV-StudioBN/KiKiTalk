@@ -5,25 +5,17 @@ import 'package:kikitalk/features/cumulativepoint/domain/entities/cumulativepoin
 import 'package:kikitalk/features/cumulativepoint/domain/usecases/cumulativepoint_get_usecase.dart';
 
 class CumulativePointState {
-  final bool loading;
   final ENTCumulativePoint? data;
-  final String? error;
 
   const CumulativePointState({
-    this.loading = false,
     this.data,
-    this.error,
   });
 
   CumulativePointState copyWith({
-    bool? loading,
     ENTCumulativePoint? data,
-    String? error,
   }) {
     return CumulativePointState(
-      loading: loading ?? this.loading,
       data: data ?? this.data,
-      error: error ?? this.error,
     );
   }
 }
@@ -36,14 +28,10 @@ class CumulativePointCubit extends Cubit<CumulativePointState> {
   CumulativePointCubit(this.usecase) : super(const CumulativePointState());
 
   void start(String email) {
-    emit(state.copyWith(loading: true));
-
     _subscription?.cancel();
     _subscription = usecase(UCECumulativePointWatchParams(email: email)).listen((result) {
       if (result is Success<ENTCumulativePoint>) {
-        emit(state.copyWith(loading: false, data: result.value));
-      } else if (result is Fail<ENTCumulativePoint>) {
-        emit(state.copyWith(loading: false, error: result.error.toString()));
+        emit(state.copyWith(data: result.value));
       }
     });
   }

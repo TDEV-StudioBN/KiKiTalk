@@ -5,10 +5,10 @@ const green = '\x1B[32m';
 const yellow = '\x1B[33m';
 const blue = '\x1B[34m';
 
-logInfo(String message) => print("$blueℹ️ INFO: $message$reset");
+logInfo(Object message) => print("$blueℹ️ INFO: $message$reset");
 
-logSuccess(String message) => print("$green✅ SUCCESS: $message$reset");
+logSuccess(Object message) => print("$green✅ SUCCESS: $message$reset");
 
-logWarning(String message) => print("$yellow⚠️ WARNING: $message$reset");
+logWarning(Object message) => print("$yellow⚠️ WARNING: $message$reset");
 
-logError(String message, {StackTrace? stackTrace}) => print("$red❌ ERROR: $message$reset \n${stackTrace?.toString()}");
+logError(Object message, {StackTrace? stackTrace}) => print("$red❌ ERROR: $message$reset \n${stackTrace?.toString()}");

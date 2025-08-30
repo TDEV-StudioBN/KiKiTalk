@@ -23,6 +23,21 @@ class TaskEntity {
     required this.isRewardGiven,
   });
 
+  @override
+  String toString() {
+    return 'TaskEntity('
+        ' id: $id,'
+        ' userEmail: $userEmail,'
+        ' key: $key,'
+        ' title: $title,'
+        ' description: $description,'
+        ' progress: $progress, '
+        ' total: $total,'
+        ' rewardGold: $rewardGold,'
+        ' rewardDiamond: $rewardDiamond,'
+        ' isRewardGiven: $isRewardGiven)';
+  }
+
   TaskEntity copyWith({
     String? key,
     String? title,

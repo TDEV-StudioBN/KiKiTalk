@@ -9,9 +9,12 @@ TaskTable get _table => TableSchemas.task;
 abstract class ITaskRepository {
   Future<List<TaskEntity>> getTasks(String userEmail);
   Future<TaskEntity?> getTaskById(String taskId);
+  Future<List<TaskEntity>> getTaskByKey(String userEmail, String key);
   Future<void> updateTask(TaskEntity entity);
   Future<void> createTask(TaskEntity entity);
+  Future<void> createTasks(List<TaskEntity> entities);
   Future<void> deleteByEmail(String email);
+  Future<void> deleteByEmailAndKey(String email, String key);
 }
 
 class TaskRepositoryImpl extends ITaskRepository {
@@ -42,6 +45,16 @@ class TaskRepositoryImpl extends ITaskRepository {
   }
 
   @override
+  Future<List<TaskEntity>> getTaskByKey(String userEmail, String key) async {
+    final result = await db.selectMany(
+        table: _table.name,
+        whereClause: '${_table.columnUserEmail} = ? AND ${_table.columnKey} = ?',
+        whereArgs: [userEmail, key]
+    );
+    return result.map((e) => TaskDTO.fromJson(e).toEntity()).toList();
+  }
+
+  @override
   Future<void> updateTask(TaskEntity entity) async {
     final data = TaskDTO.fromEntity(entity).toJson();
     await db.update(
@@ -68,6 +81,24 @@ class TaskRepositoryImpl extends ITaskRepository {
         table: _table.name,
         whereClause: '${_table.columnUserEmail} = ?',
         whereArgs: [email]
+    );
+  }
+
+  @override
+  Future<void> deleteByEmailAndKey(String email, String key) async {
+    await db.delete(
+        table: _table.name,
+        whereClause: '${_table.columnUserEmail} = ? AND ${_table.columnKey} = ?',
+        whereArgs: [email, key]
+    );
+  }
+
+  @override
+  Future<void> createTasks(List<TaskEntity> entities) async {
+    final data = entities.map((e) => TaskDTO.fromEntity(e).toJson()).toList();
+    await db.upsertBatch(
+        table: _table.name,
+        dataList: data,
     );
   }
 }

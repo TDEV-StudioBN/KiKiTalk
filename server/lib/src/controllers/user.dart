@@ -7,11 +7,13 @@ import 'package:server/src/utils/log_util.dart';
 sealed class IUserController {
   /// Tham số
   /// [request] = [UserEntity]
+  /// ```
   /// {
   ///   'email': String
   ///   'name': String
   ///   'avatart' String
   /// }
+  /// ```
   Response login(Map<String, Object?> request);
 }
 

@@ -4,9 +4,10 @@ import 'package:server/src/dtos/cumulativepoint.dart';
 import 'package:server/src/services/cumulativepoint.dart';
 
 sealed class ICumulativePointController extends APIController {
-
-  /// RealTime
-  /// Tham số [request] = {'userEmail': 'abc@.com'};
+  /// RealTime point
+  /// ```
+  /// String userEmail
+  /// ```
   StreamResponse watchCumulativePoint(Map<String, Object?> request);
 }
 

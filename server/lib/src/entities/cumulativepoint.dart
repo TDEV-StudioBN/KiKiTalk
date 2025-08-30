@@ -15,6 +15,11 @@ class CumulativePointEntity {
     required this.streakDays,
   });
 
+  @override
+  String toString() {
+    return 'CumulativePointEntity(id: $id, userEmail: $userEmail, diamond: $diamond, gold: $gold, rankPoints: $rankPoints, streakDays: $streakDays)';
+  }
+
   CumulativePointEntity copyWith({
     int? diamond,
     int? gold,

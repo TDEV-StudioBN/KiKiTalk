@@ -23,28 +23,28 @@ sealed class IQuizController extends APIController {
   ///       writingCorrect: json['writingCorrect'] as int,
   ///       writingInCorrect: json['writingInCorrect'] as int,
   /// }
-  Response completedQuiz(Map<String, Object?> request);
+  IFutureResponse completedQuiz(Map<String, Object?> request);
 }
 
 class QuizControllerImpl extends IQuizController {
   final _quizService = QuizServiceImpl();
 
   @override
-  Response completedQuiz(Map<String, Object?> request) {
+  IFutureResponse completedQuiz(Map<String, Object?> request) {
     try {
       QuizResultEntity quizResultEntity;
       try {
         quizResultEntity = QuizResultDTO.fromJson(request).toEntity();
       }
       catch (e) {
-        return BadRequest400();
+        return FutureResponse.value(BadRequest400());
       }
       _quizService.onQuizCompleted(quizResultEntity);
-      return Success200({});
+      return FutureResponse.value(Success200({}));
     }
     catch (e, s) {
       logError(e.toString(), stackTrace: s);
-      return InternalServerError500();
+      return FutureResponse.value(InternalServerError500());
     }
   }
 }

@@ -28,7 +28,7 @@ class TaskDTO extends TaskEntity {
       _table.columnTotal: total,
       _table.columnRewardGold: rewardGold,
       _table.columnRewardDiamond: rewardDiamond,
-      _table.columnIsRewardGiven: isRewardGiven,
+      _table.columnIsRewardGiven: isRewardGiven ? 1 : 0,
     };
   }
 
@@ -58,7 +58,7 @@ class TaskDTO extends TaskEntity {
       total: json[_table.columnTotal] as double,
       rewardGold: json[_table.columnRewardGold] as int,
       rewardDiamond: json[_table.columnRewardDiamond] as int,
-      isRewardGiven: json[_table.columnIsRewardGiven] as bool,
+      isRewardGiven: (json[_table.columnIsRewardGiven] as int) == 0 ? false : true,
     );
   }
 

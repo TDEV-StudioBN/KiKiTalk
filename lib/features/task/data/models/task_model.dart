@@ -6,6 +6,7 @@ TaskTable get _table => TaskTable.instance;
 class MODTask extends ENTTask {
   MODTask({
     required super.id,
+    required super.userEmail,
     required super.key,
     required super.title,
     required super.description,
@@ -21,6 +22,7 @@ class MODTask extends ENTTask {
   Map<String, dynamic> toMap() {
     return {
       _table.columnId: id,
+      _table.columnUserEmail: userEmail,
       _table.columnKey: key,
       _table.columnTitle: title,
       _table.columnDescription: description,
@@ -34,7 +36,8 @@ class MODTask extends ENTTask {
 
   factory MODTask.fromMap(Map<String, dynamic> map) {
     return MODTask(
-      id: map[_table.columnId] as int,
+      id: map[_table.columnId] as String,
+      userEmail: map[_table.columnUserEmail] as String,
       key: map[_table.columnKey] as String,
       title: map[_table.columnTitle] as String,
       description: map[_table.columnDescription] as String,
@@ -49,6 +52,7 @@ class MODTask extends ENTTask {
   factory MODTask.fromEntity(ENTTask entity) {
     return MODTask(
       id: entity.id,
+      userEmail: entity.userEmail,
       key: entity.key,
       title: entity.title,
       description: entity.description,
